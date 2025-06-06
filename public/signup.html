@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up - Chat App</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Sign Up</h2>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="signup()">Sign Up</button>
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+    <p id="error-msg" class="error"></p>
+  </div>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyB3BfWqUVG468FF-i6A0QSKIQ3M1GV_r9c",
+      authDomain: "chat-feature-78cc2.firebaseapp.com",
+      projectId: "chat-feature-78cc2",
+      storageBucket: "chat-feature-78cc2.firebasestorage.app",
+      messagingSenderId: "972109962200",
+      appId: "1:972109962200:web:215699feebf978e7f070ad",
+      measurementId: "G-DJS38ED93F"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function signup() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const errorMsg = document.getElementById("error-msg");
+      errorMsg.textContent = "";
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          window.location.href = "login.html";
+        })
+        .catch((error) => {
+          errorMsg.textContent = error.message;
+        });
+    }
+  </script>
+</body>
+</html>
